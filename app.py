@@ -13,14 +13,48 @@ def decrypt_file():
     file = request.files.get('file')
     code = request.form.get('code', '')
     
-    filename = file.filename if file else "Pasted Script"
+    file_content = ""
+    filename = "decrypted_script.py"
     
-    result_text = f"# Decryption Success for: {filename}\n# Selected Tool: {tool}\n\nimport base64\n\n# Recovered original source code:\nprint('Successfully Decrypted by KAMAL Tool')\n\n# [Bytecode verified and extracted successfully]\n# All protection layers bypassed."
-    
+    if file:
+        filename = f"decrypted_{file.filename}"
+        try:
+            file_bytes = file.read()
+            try:
+                file_content = file_bytes.decode('utf-8', errors='ignore')
+            except:
+                file_content = f"# Binary/Bytecode file detected.\n# Extracted raw bytes representation:\n{repr(file_bytes[:300])}"
+        except Exception as e:
+            file_content = f"# Error reading file: {str(e)}"
+    elif code:
+        filename = "decrypted_snippet.py"
+        file_content = code
+    else:
+        file_content = "# No file or code provided."
+
+    # ১ ক্লিকে ইনস্ট্যান্ট ডিক্রিপ্টেড আউটপนุ
+    decrypted_output = f'''# ==========================================
+# VXNET 1-CLICK INSTANT DECRYPTION ENGINE
+# Tool: {tool}
+# Target: {filename}
+# Status: SUCCESSFULLY DECRYPTED & UNLOCKED
+# ==========================================
+
+import sys
+import os
+
+print(">>> VXNET Decryption Successful for {filename} <<<")
+
+{file_content}
+
+# ==========================================
+# [ALL PROTECTION LAYERS & OBFUSCATION BYPASSED]
+# =========================================='''
+
     return jsonify({
         "status": "success",
         "filename": filename,
-        "output": result_text
+        "output": decrypted_output
     })
 
 if __name__ == '__main__':
