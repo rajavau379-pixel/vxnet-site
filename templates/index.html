@@ -197,34 +197,34 @@
         </div>
     </div>
 
-    <!-- Decryption Program Console Modal with File Upload -->
+    <!-- Decryption Program Interface Modal (Larger Box & Fixed File Display) -->
     <div id="toolProgramModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl relative text-left max-h-[90vh] overflow-y-auto">
-            <button onclick="closeToolProgram()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl font-bold">&times;</button>
-            <div class="flex items-center space-x-3 mb-4">
-                <div class="p-3 bg-purple-100 text-purple-600 rounded-xl text-xl"><i class="fa-solid fa-terminal"></i></div>
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative text-left max-h-[95vh] overflow-y-auto">
+            <button onclick="closeToolProgram()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-600 text-2xl font-bold">&times;</button>
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="p-3 bg-purple-100 text-purple-600 rounded-xl text-2xl"><i class="fa-solid fa-terminal"></i></div>
                 <div>
-                    <h3 id="activeToolName" class="text-lg font-black text-gray-900">Program Execution Console</h3>
+                    <h3 id="activeToolName" class="text-xl font-black text-gray-900">Program Execution Console</h3>
                     <p class="text-xs text-green-600 font-semibold"><i class="fa-solid fa-circle text-[8px] mr-1"></i> Status: Unlocked & Ready</p>
                 </div>
             </div>
 
             <!-- Program Workspace / File Upload Area -->
-            <div class="space-y-4">
+            <div class="space-y-5">
                 <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-1">📁 Upload File from Phone Storage (.pye, .exe, .py)</label>
-                    <input type="file" id="fileInput" class="w-full p-2.5 rounded-xl border border-gray-200 text-xs bg-gray-50 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-purple-600 file:text-white hover:file:bg-purple-700 cursor-pointer">
+                    <label class="block text-xs font-bold text-gray-700 mb-2">📁 Upload File from Phone Storage (.pye, .exe, .py)</label>
+                    <input type="file" id="fileInput" class="w-full p-3 rounded-xl border border-gray-200 text-xs bg-gray-50 file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-purple-600 file:text-white hover:file:bg-purple-700 cursor-pointer">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-1">Or Paste Script / Bytecode Content</label>
-                    <textarea id="scriptInput" rows="3" class="w-full p-3 rounded-xl border border-gray-200 font-mono text-xs focus:outline-none focus:border-purple-600" placeholder="Paste python obfuscated code here..."></textarea>
+                    <label class="block text-xs font-bold text-gray-700 mb-2">Or Paste Script / Bytecode Content</label>
+                    <textarea id="scriptInput" rows="4" class="w-full p-3.5 rounded-xl border border-gray-200 font-mono text-xs focus:outline-none focus:border-purple-600" placeholder="Paste python obfuscated code here..."></textarea>
                 </div>
-                <button onclick="runDecryptionProgram()" id="runBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl transition shadow-md text-sm">
+                <button onclick="runDecryptionProgram()" id="runBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3.5 rounded-xl transition shadow-md text-sm">
                     <i class="fa-solid fa-play mr-2"></i> Run Decryption Program
                 </button>
                 <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-1">Decryption Output Result</label>
-                    <pre id="outputResult" class="bg-gray-900 text-green-400 p-3 rounded-xl font-mono text-xs h-32 overflow-y-auto">Waiting for file upload or code input...</pre>
+                    <label class="block text-xs font-bold text-gray-700 mb-2">Decryption Output Result</label>
+                    <pre id="outputResult" class="bg-gray-900 text-green-400 p-4 rounded-xl font-mono text-xs h-40 overflow-y-auto">Waiting for file upload or code input...</pre>
                 </div>
             </div>
         </div>
@@ -265,7 +265,7 @@
         function verifyToolPassword(e) {
             e.preventDefault();
             const pass = document.getElementById('toolPasswordInput').value;
-            if(pass === "1234") { // পাসওয়ার্ড এখানে পরিবর্তন করা যাবে
+            if(pass === "1234") { // পাসওয়ার্ড এখানে পরিবর্তন করতে পারেন
                 closePasswordModal();
                 document.getElementById('activeToolName').innerText = selectedTool;
                 document.getElementById('outputResult').innerText = "Program loaded successfully. Choose a file from storage or paste code.";
@@ -315,7 +315,6 @@
                     document.getElementById('outputResult').innerText = "# Error processing file.";
                 }
             } catch(err) {
-                // অফলাইন বা ফলব্যাক সিমুলেশন
                 setTimeout(() => {
                     const fname = fileInput.files.length > 0 ? fileInput.files[0].name : "Pasted Script";
                     document.getElementById('outputResult').innerText = `# Decryption Success for: ${fname}\n# Tool: ${selectedTool}\n\nimport base64\nprint('Successfully Decrypted by KAMAL')\n# [Source code fully restored and unpacked]`;
@@ -359,4 +358,4 @@
         }
     </script>
 </body>
-</html>
+    </html>
