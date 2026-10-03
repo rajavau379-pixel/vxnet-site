@@ -49,7 +49,6 @@
             <p class="text-gray-600">Click any decryption tool below, enter password, and execute the program directly</p>
         </div>
 
-        <!-- Decryption Tools Grid -->
         <div id="content-decryption" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
             
             <!-- Tool 1 -->
@@ -116,21 +115,6 @@
             </div>
 
         </div>
-
-        <!-- Encryption Tab Content -->
-        <div id="content-encryption" class="hidden grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
-                <div>
-                    <div class="p-3 bg-purple-50 text-purple-600 rounded-xl text-xl inline-block mb-4"><i class="fa-solid fa-lock"></i></div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Advanced Python Obfuscator</h3>
-                    <p class="text-gray-600 text-sm mb-6">Secure your code with multi-layer bytecode encryption.</p>
-                </div>
-                <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-                    <span class="text-xs text-gray-500 font-medium">Status: <strong class="text-green-600 text-sm">Active</strong></span>
-                    <button onclick="promptPassword('Advanced Python Obfuscator')" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-5 py-2 rounded-xl text-sm transition shadow-sm">Launch Tool</button>
-                </div>
-            </div>
-        </div>
     </section>
 
     <!-- Social Links & Contact Section -->
@@ -140,8 +124,6 @@
             <p class="text-gray-600">Connect with KAMAL through official channels</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            
-            <!-- YouTube -->
             <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 text-center flex flex-col items-center justify-between">
                 <div>
                     <div class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-xl mb-4 mx-auto"><i class="fa-brands fa-youtube"></i></div>
@@ -150,8 +132,6 @@
                 </div>
                 <a href="https://youtube.com/@raja-vau-teach-world?si=BF3R1hrHR9qCdblS" target="_blank" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2.5 rounded-xl text-sm transition shadow-sm"><i class="fa-brands fa-youtube mr-2"></i>Visit Channel</a>
             </div>
-
-            <!-- WhatsApp -->
             <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 text-center flex flex-col items-center justify-between">
                 <div>
                     <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xl mb-4 mx-auto"><i class="fa-brands fa-whatsapp"></i></div>
@@ -160,8 +140,6 @@
                 </div>
                 <a href="https://chat.whatsapp.com/K9E5ULcGZ7G0O15wwvodfy?s=cl&p=a&ilr=4&iam=2" target="_blank" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2.5 rounded-xl text-sm transition shadow-sm"><i class="fa-brands fa-whatsapp mr-2"></i>Join Group</a>
             </div>
-
-            <!-- Phone -->
             <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 text-center flex flex-col items-center justify-between">
                 <div>
                     <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-xl mb-4 mx-auto"><i class="fa-solid fa-phone"></i></div>
@@ -170,7 +148,6 @@
                 </div>
                 <a href="tel:01736602421" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2.5 rounded-xl text-sm transition shadow-sm"><i class="fa-solid fa-phone mr-2"></i>০১৭৩৬৬০২৪২১</a>
             </div>
-
         </div>
     </section>
 
@@ -180,13 +157,11 @@
         <p class="text-purple-400 font-semibold">Developed by <span class="text-white">KAMAL</span> | Contact: <span class="text-white">০১৭৩৬৬০২৪২১</span></p>
     </footer>
 
-    <!-- Password Prompt Modal -->
-    <div id="passwordModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+    <!-- Password Modal -->
+    <div id="passwordModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
         <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl text-center relative">
             <button onclick="closePasswordModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl font-bold">&times;</button>
-            <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3">
-                <i class="fa-solid fa-lock"></i>
-            </div>
+            <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3"><i class="fa-solid fa-lock"></i></div>
             <h3 class="text-xl font-black text-gray-900 mb-1">Enter Tool Password</h3>
             <p id="toolTitleDisplay" class="text-purple-600 font-semibold text-xs mb-4"></p>
             <form onsubmit="verifyToolPassword(event)" class="space-y-4">
@@ -197,8 +172,8 @@
         </div>
     </div>
 
-    <!-- Decryption Program Interface Modal (Larger Box & Fixed File Display) -->
-    <div id="toolProgramModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+    <!-- Decryption Program Console Modal (Large & Clean File Display) -->
+    <div id="toolProgramModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
         <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative text-left max-h-[95vh] overflow-y-auto">
             <button onclick="closeToolProgram()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-600 text-2xl font-bold">&times;</button>
             <div class="flex items-center space-x-3 mb-6">
@@ -209,22 +184,23 @@
                 </div>
             </div>
 
-            <!-- Program Workspace / File Upload Area -->
+            <!-- Workspace -->
             <div class="space-y-5">
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-2">📁 Upload File from Phone Storage (.pye, .exe, .py)</label>
-                    <input type="file" id="fileInput" class="w-full p-3 rounded-xl border border-gray-200 text-xs bg-gray-50 file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-purple-600 file:text-white hover:file:bg-purple-700 cursor-pointer">
+                <div class="bg-purple-50 p-4 rounded-2xl border border-purple-100">
+                    <label class="block text-xs font-bold text-purple-900 mb-2">📁 Select Encrypted File from Phone</label>
+                    <input type="file" id="fileInput" onchange="showFileName(this)" class="w-full text-xs text-gray-600 file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-purple-600 file:text-white hover:file:bg-purple-700 cursor-pointer">
+                    <p id="selectedFileName" class="text-xs text-purple-700 font-semibold mt-2 hidden">Selected File: <span id="fileNameSpan" class="underline"></span></p>
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-2">Or Paste Script / Bytecode Content</label>
-                    <textarea id="scriptInput" rows="4" class="w-full p-3.5 rounded-xl border border-gray-200 font-mono text-xs focus:outline-none focus:border-purple-600" placeholder="Paste python obfuscated code here..."></textarea>
+                    <label class="block text-xs font-bold text-gray-700 mb-2">Or Paste Obscured Python Script Content</label>
+                    <textarea id="scriptInput" rows="4" class="w-full p-3.5 rounded-xl border border-gray-200 font-mono text-xs focus:outline-none focus:border-purple-600" placeholder="Paste python script here..."></textarea>
                 </div>
                 <button onclick="runDecryptionProgram()" id="runBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3.5 rounded-xl transition shadow-md text-sm">
                     <i class="fa-solid fa-play mr-2"></i> Run Decryption Program
                 </button>
                 <div>
                     <label class="block text-xs font-bold text-gray-700 mb-2">Decryption Output Result</label>
-                    <pre id="outputResult" class="bg-gray-900 text-green-400 p-4 rounded-xl font-mono text-xs h-40 overflow-y-auto">Waiting for file upload or code input...</pre>
+                    <pre id="outputResult" class="bg-gray-900 text-green-400 p-4 rounded-xl font-mono text-xs h-40 overflow-y-auto">Waiting for execution...</pre>
                 </div>
             </div>
         </div>
@@ -265,12 +241,13 @@
         function verifyToolPassword(e) {
             e.preventDefault();
             const pass = document.getElementById('toolPasswordInput').value;
-            if(pass === "1234") { // পাসওয়ার্ড এখানে পরিবর্তন করতে পারেন
+            if(pass === "1234") {
                 closePasswordModal();
                 document.getElementById('activeToolName').innerText = selectedTool;
-                document.getElementById('outputResult').innerText = "Program loaded successfully. Choose a file from storage or paste code.";
+                document.getElementById('outputResult').innerText = "Program loaded. Choose file or paste code to run.";
                 document.getElementById('fileInput').value = "";
                 document.getElementById('scriptInput').value = "";
+                document.getElementById('selectedFileName').classList.add('hidden');
                 document.getElementById('toolProgramModal').classList.remove('hidden');
                 document.getElementById('toolProgramModal').classList.add('flex');
             } else {
@@ -283,12 +260,19 @@
             document.getElementById('toolProgramModal').classList.remove('flex');
         }
 
+        function showFileName(input) {
+            if(input.files && input.files[0]) {
+                document.getElementById('fileNameSpan').innerText = input.files[0].name;
+                document.getElementById('selectedFileName').classList.remove('hidden');
+            }
+        }
+
         async function runDecryptionProgram() {
             const fileInput = document.getElementById('fileInput');
             const code = document.getElementById('scriptInput').value;
             
             if(fileInput.files.length === 0 && !code.trim()) {
-                alert("দয়া করে ফাইল ম্যানেজার থেকে ফাইল সিলেক্ট করুন অথবা কোড পেস্ট করুন!");
+                alert("দয়া করে ফাইল সিলেক্ট করুন অথবা কোড পেস্ট করুন!");
                 return;
             }
 
