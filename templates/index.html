@@ -46,10 +46,9 @@
     <section id="services" class="py-12 px-4 max-w-7xl mx-auto">
         <div class="text-center mb-12">
             <h2 class="text-3xl font-black text-gray-900 mb-2">Decryption Programs</h2>
-            <p class="text-gray-600">Click any decryption tool below, enter your password, and execute the program directly</p>
+            <p class="text-gray-600">Click any decryption tool below, enter password, and run the program directly</p>
         </div>
 
-        <!-- Decryption Tools Grid -->
         <div id="content-decryption" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
             
             <!-- Tool 1 -->
@@ -182,7 +181,7 @@
 
     <!-- Password Prompt Modal -->
     <div id="passwordModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl text-center">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl text-center relative">
             <button onclick="closePasswordModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl font-bold">&times;</button>
             <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3">
                 <i class="fa-solid fa-lock"></i>
@@ -197,30 +196,38 @@
         </div>
     </div>
 
-    <!-- Decryption Program Interface Modal (Opens after correct password) -->
+    <!-- Decryption Program Console Modal with File Upload -->
     <div id="toolProgramModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl relative text-left">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl relative text-left max-h-[90vh] overflow-y-auto">
             <button onclick="closeToolProgram()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl font-bold">&times;</button>
             <div class="flex items-center space-x-3 mb-4">
                 <div class="p-3 bg-purple-100 text-purple-600 rounded-xl text-xl"><i class="fa-solid fa-terminal"></i></div>
                 <div>
-                    <h3 id="activeToolName" class="text-lg font-black text-gray-900">Program Execution Console</h3>
+                    <h3 id="activeToolName" class="text-lg font-black text-gray-900">Program Console</h3>
                     <p class="text-xs text-green-600 font-semibold"><i class="fa-solid fa-circle text-[8px] mr-1"></i> Status: Unlocked & Ready</p>
                 </div>
             </div>
 
-            <!-- Program Workspace / Script Input Area -->
+            <!-- Workspace -->
             <div class="space-y-4">
+                <!-- File Upload Field -->
                 <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-1">Upload Encrypted File or Paste Script</label>
-                    <textarea id="scriptInput" rows="5" class="w-full p-3 rounded-xl border border-gray-200 font-mono text-xs focus:outline-none focus:border-purple-600" placeholder="Paste your obfuscated python code / bytecode here..."></textarea>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Upload Encrypted File (.pye, .pyc, .exe, .zip)</label>
+                    <input type="file" id="fileUploadInput" onchange="handleFileUpload(event)" class="w-full p-2.5 rounded-xl border border-gray-200 text-xs bg-gray-50 text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-purple-600 file:text-white hover:file:bg-purple-700 cursor-pointer">
                 </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Or Paste Script / Bytecode Content</label>
+                    <textarea id="scriptInput" rows="3" class="w-full p-3 rounded-xl border border-gray-200 font-mono text-xs focus:outline-none focus:border-purple-600" placeholder="Paste python obfuscated code here..."></textarea>
+                </div>
+
                 <button onclick="runDecryptionProgram()" id="runBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl transition shadow-md text-sm">
                     <i class="fa-solid fa-play mr-2"></i> Run Decryption Program
                 </button>
+
                 <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-1">Decrypted Output Result</label>
-                    <pre id="outputResult" class="bg-gray-900 text-green-400 p-3 rounded-xl font-mono text-xs h-32 overflow-y-auto">Waiting for execution...</pre>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Decryption Output Result</label>
+                    <pre id="outputResult" class="bg-gray-900 text-green-400 p-3 rounded-xl font-mono text-xs h-32 overflow-y-auto">Waiting for file upload or code input...</pre>
                 </div>
             </div>
         </div>
@@ -255,77 +262,61 @@
 
         function closePasswordModal() {
             document.getElementById('passwordModal').classList.add('hidden');
-            document.getElementById('passwordModal').classList.remove('flex');
-        }
+            document.একদম ঠিক ধরেছেন! স্ক্রিনশটে দেখা যাচ্ছে শুধু টেক্সট লেখার বা পেস্ট করার বক্স রয়েছে, সরাসরি ফাইল (যেমন `.py`, `.pye`, `.exe` বা জিপ ফাইল) আপলোড করার কোনো অপশন বা বাটন সেখানে নেই।
 
-        function verifyToolPassword(e) {
-            e.preventDefault();
-            const pass = document.getElementById('toolPasswordInput').value;
-            if(pass === "1234") { // পাসওয়ার্ড এখানে আপনার ইচ্ছেমতো দিতে পারেন
-                closePasswordModal();
-                document.getElementById('activeToolName').innerText = selectedTool;
-                document.getElementById('outputResult').innerText = "Program loaded successfully. Ready to decrypt.";
-                document.getElementById('scriptInput').value = "";
-                document.getElementById('toolProgramModal').classList.remove('hidden');
-                document.getElementById('toolProgramModal').classList.add('flex');
-            } else {
-                alert("Incorrect Password! Try '1234'");
-            }
-        }
+আপনার এই সমস্যাটি সমাধান করে দিচ্ছি। এখন কনসোলের ভেতরে ফাইল আপলোড করার একটি সুন্দর ফাইল ইনপুট (`Choose File`) অপশন যুক্ত করে দেওয়া হয়েছে, যাতে ব্যবহারকারীরা সরাসরি যেকোনো এনক্রিপ্ট করা ফাইল আপলোড করতে পারেন।
 
-        function closeToolProgram() {
-            document.getElementById('toolProgramModal').classList.add('hidden');
-            document.getElementById('toolProgramModal').classList.remove('flex');
-        }
+নিচে আপডেট করা সম্পূর্ণ কোডটি দেওয়া হলো:
 
-        function runDecryptionProgram() {
-            const code = document.getElementById('scriptInput').value;
-            if(!code.trim()) {
-                alert("Please paste your script or code first!");
-                return;
-            }
-            const btn = document.getElementById('runBtn');
-            btn.innerText = "Executing Decryption...";
-            btn.disabled = true;
+### আপডেট করা কোড (`index.html`):
 
-            setTimeout(() => {
-                document.getElementById('outputResult').innerText = "# Decryption Successful!\n\nimport base64\n# Recovered original source code:\nprint('Welcome to KAMAL Decryption Tool!')\n\n" + code.split('').reverse().join('').substring(0, 50) + "\n# [Source code fully restored]";
-                btn.innerHTML = '<i class="fa-solid fa-play mr-2"></i> Run Decryption Program';
-                btn.disabled = false;
-            }, 1500);
-        }
+```html
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VXNET - Python Decryption & Encryption Services</title>
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
 
-        function openProfileModal() {
-            document.getElementById('profileModal').classList.remove('hidden');
-            document.getElementById('profileModal').classList.add('flex');
-        }
-        function closeProfileModal() {
-            document.getElementById('profileModal').classList.add('hidden');
-            document.getElementById('profileModal').classList.remove('flex');
-        }
+    <!-- Navigation -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-purple-600 text-white p-2 rounded-lg font-bold text-lg"><i class="fa-solid fa-shield-halved"></i></div>
+                <span class="text-xl font-black tracking-wider text-purple-900">VXNET</span>
+            </div>
+            <div class="flex items-center space-x-2 bg-gray-100 p-1 rounded-full">
+                <button onclick="switchTab('decryption')" id="btn-decryption" class="px-4 py-1.5 rounded-full text-sm font-semibold bg-white text-purple-700 shadow-sm transition">Decryption Tools</button>
+                <button onclick="switchTab('encryption')" id="btn-encryption" class="px-4 py-1.5 rounded-full text-sm font-semibold text-gray-600 hover:text-purple-700 transition">Encryption</button>
+            </div>
+            <div class="flex items-center space-x-3">
+                <button onclick="openProfileModal()" class="bg-purple-50 hover:bg-purple-100 text-purple-700 px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 border border-purple-200">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <span>Profile</span>
+                </button>
+            </div>
+        </div>
+    </header>
 
-        function switchTab(tab) {
-            const decBtn = document.getElementById('btn-decryption');
-            const encBtn = document.getElementById('btn-encryption');
-            const decContent = document.getElementById('content-decryption');
-            const encContent = document.getElementById('content-encryption');
-            
-            if(tab === 'decryption') {
-                decBtn.className = "px-4 py-1.5 rounded-full text-sm font-semibold bg-white text-purple-700 shadow-sm transition";
-                encBtn.className = "px-4 py-1.5 rounded-full text-sm font-semibold text-gray-600 hover:text-purple-700 transition";
-                decContent.classList.remove('hidden');
-                decContent.classList.add('grid');
-                encContent.classList.add('hidden');
-                encContent.classList.remove('grid');
-            } else {
-                encBtn.className = "px-4 py-1.5 rounded-full text-sm font-semibold bg-white text-purple-700 shadow-sm transition";
-                decBtn.className = "px-4 py-1.5 rounded-full text-sm font-semibold text-gray-600 hover:text-purple-700 transition";
-                encContent.classList.remove('hidden');
-                encContent.classList.add('grid');
-                decContent.classList.add('hidden');
-                decContent.classList.remove('grid');
-            }
-        }
-    </script>
-</body>
-</html>
+    <!-- Hero Section -->
+    <section id="hero-section" class="py-16 px-4 text-center bg-gradient-to-b from-gray-100 to-gray-50">
+        <div class="max-w-3xl mx-auto">
+            <span class="bg-purple-100 text-purple-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">#1 Fast Automated Decryption</span>
+            <h1 class="text-4xl sm:text-5xl font-black text-gray-900 mt-4 mb-4">Direct Python Decryption Portal</h1>
+            <p class="text-gray-600 text-base sm:text-lg mb-8">Select your protection type, enter access password, and run decryption tools instantly on your protected scripts.</p>
+            <div class="flex justify-center space-x-4">
+                <a href="#services" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg transition">Select Tool</a>
+                <a href="#contact" class="bg-white hover:bg-gray-100 text-purple-700 border border-purple-200 font-semibold px-6 py-3 rounded-xl shadow-sm transition">Support Links</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services / Tools Section -->
+    <section id="services" class="py-12 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-black text-gray-900 mb-2">Decryption Programs</h2>
+            <p class="text-gray
