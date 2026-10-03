@@ -32,9 +32,9 @@
     <!-- Hero Section -->
     <section id="hero-section" class="py-16 px-4 text-center bg-gradient-to-b from-gray-100 to-gray-50">
         <div class="max-w-3xl mx-auto">
-            <span class="bg-purple-100 text-purple-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">#1 Fast Automated Decryption</span>
+            <span class="bg-purple-100 text-purple-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">#1 1-Click Instant Decryption</span>
             <h1 class="text-4xl sm:text-5xl font-black text-gray-900 mt-4 mb-4">Direct Python Decryption Portal</h1>
-            <p class="text-gray-600 text-base sm:text-lg mb-8">Select your protection type, enter access password, and run decryption tools instantly on your protected scripts.</p>
+            <p class="text-gray-600 text-base sm:text-lg mb-8">Upload your protected file, enter access password, and decrypt instantly with a single click.</p>
             <div class="flex justify-center space-x-4">
                 <a href="#services" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg transition">Select Tool</a>
                 <a href="#contact" class="bg-white hover:bg-gray-100 text-purple-700 border border-purple-200 font-semibold px-6 py-3 rounded-xl shadow-sm transition">Support Links</a>
@@ -46,7 +46,7 @@
     <section id="services" class="py-12 px-4 max-w-7xl mx-auto">
         <div class="text-center mb-12">
             <h2 class="text-3xl font-black text-gray-900 mb-2">Decryption Programs</h2>
-            <p class="text-gray-600">Click any decryption tool below, enter password, and execute the program directly</p>
+            <p class="text-gray-600">Click any tool, enter password (1234), and run instant decryption</p>
         </div>
 
         <div id="content-decryption" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
@@ -59,7 +59,7 @@
                         <span class="bg-green-100 text-green-700 text-xs font-bold px-2.5 py-1 rounded-full">Ready</span>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Executable File Analyzer & Extractor</h3>
-                    <p class="text-gray-600 text-sm mb-6">Extracts Python bytecode and scripts from packed .exe files (PyInstaller / Py2Exe).</p>
+                    <p class="text-gray-600 text-sm mb-6">Extracts Python bytecode and scripts from packed .exe files instantly.</p>
                 </div>
                 <div class="flex items-center justify-between pt-4 border-t border-gray-100">
                     <span class="text-xs text-gray-500 font-medium">Access: <strong class="text-purple-700 text-sm">Password Protected</strong></span>
@@ -75,7 +75,7 @@
                         <div class="p-3 bg-purple-50 text-purple-600 rounded-xl text-xl"><i class="fa-solid fa-shield"></i></div>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">SourceDefender (.pye) Decryptor</h3>
-                    <p class="text-gray-600 text-sm mb-6">Fully decrypts SourceDefender protected scripts across all versions (v15, v16+).</p>
+                    <p class="text-gray-600 text-sm mb-6">Fully decrypts SourceDefender protected scripts with 1-click execution.</p>
                 </div>
                 <div class="flex items-center justify-between pt-4 border-t border-gray-100">
                     <span class="text-xs text-gray-500 font-medium">Access: <strong class="text-purple-700 text-sm">Password Protected</strong></span>
@@ -91,7 +91,7 @@
                         <div class="p-3 bg-purple-50 text-purple-600 rounded-xl text-xl"><i class="fa-solid fa-lock"></i></div>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">PyArmor 7/8/9 Decryption Engine</h3>
-                    <p class="text-gray-600 text-sm mb-6">Bypasses runtime verification and decrypts PyArmor protected bytecode back to clean source code.</p>
+                    <p class="text-gray-600 text-sm mb-6">Bypasses runtime verification and decrypts PyArmor bytecode instantly.</p>
                 </div>
                 <div class="flex items-center justify-between pt-4 border-t border-gray-100">
                     <span class="text-xs text-gray-500 font-medium">Access: <strong class="text-purple-700 text-sm">Password Protected</strong></span>
@@ -172,35 +172,38 @@
         </div>
     </div>
 
-    <!-- Decryption Program Console Modal (Large & Clean File Display) -->
+    <!-- Decryption Program Console Modal (1-Click Instant Decryption) -->
     <div id="toolProgramModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
         <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative text-left max-h-[95vh] overflow-y-auto">
             <button onclick="closeToolProgram()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-600 text-2xl font-bold">&times;</button>
             <div class="flex items-center space-x-3 mb-6">
                 <div class="p-3 bg-purple-100 text-purple-600 rounded-xl text-2xl"><i class="fa-solid fa-terminal"></i></div>
                 <div>
-                    <h3 id="activeToolName" class="text-xl font-black text-gray-900">Program Execution Console</h3>
-                    <p class="text-xs text-green-600 font-semibold"><i class="fa-solid fa-circle text-[8px] mr-1"></i> Status: Unlocked & Ready</p>
+                    <h3 id="activeToolName" class="text-xl font-black text-gray-900">1-Click Decryption Console</h3>
+                    <p class="text-xs text-green-600 font-semibold"><i class="fa-solid fa-circle text-[8px] mr-1"></i> Status: Ready for Instant Execution</p>
                 </div>
             </div>
 
             <!-- Workspace -->
             <div class="space-y-5">
                 <div class="bg-purple-50 p-4 rounded-2xl border border-purple-100">
-                    <label class="block text-xs font-bold text-purple-900 mb-2">📁 Select Encrypted File from Phone</label>
+                    <label class="block text-xs font-bold text-purple-900 mb-2">📁 Select Encrypted File from Phone Storage</label>
                     <input type="file" id="fileInput" onchange="showFileName(this)" class="w-full text-xs text-gray-600 file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-purple-600 file:text-white hover:file:bg-purple-700 cursor-pointer">
                     <p id="selectedFileName" class="text-xs text-purple-700 font-semibold mt-2 hidden">Selected File: <span id="fileNameSpan" class="underline"></span></p>
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-2">Or Paste Obscured Python Script Content</label>
-                    <textarea id="scriptInput" rows="4" class="w-full p-3.5 rounded-xl border border-gray-200 font-mono text-xs focus:outline-none focus:border-purple-600" placeholder="Paste python script here..."></textarea>
+                    <label class="block text-xs font-bold text-gray-700 mb-2">Or Paste Script Content</label>
+                    <textarea id="scriptInput" rows="3" class="w-full p-3.5 rounded-xl border border-gray-200 font-mono text-xs focus:outline-none focus:border-purple-600" placeholder="Paste python script here..."></textarea>
                 </div>
                 <button onclick="runDecryptionProgram()" id="runBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3.5 rounded-xl transition shadow-md text-sm">
-                    <i class="fa-solid fa-play mr-2"></i> Run Decryption Program
+                    <i class="fa-solid fa-bolt mr-2"></i> 1-Click Instant Decrypt
                 </button>
                 <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-2">Decryption Output Result</label>
-                    <pre id="outputResult" class="bg-gray-900 text-green-400 p-4 rounded-xl font-mono text-xs h-40 overflow-y-auto">Waiting for execution...</pre>
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="text-xs font-bold text-gray-700">Decryption Output Result</label>
+                        <button id="downloadBtn" onclick="downloadDecryptedFile()" class="hidden bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition"><i class="fa-solid fa-download mr-1"></i> Download Decrypted File</button>
+                    </div>
+                    <pre id="outputResult" class="bg-gray-900 text-green-400 p-4 rounded-xl font-mono text-xs h-40 overflow-y-auto">Upload file and click 1-Click Decrypt...</pre>
                 </div>
             </div>
         </div>
@@ -224,6 +227,8 @@
 
     <script>
         let selectedTool = "";
+        let decryptedDataText = "";
+        let decryptedFileName = "decrypted_script.py";
 
         function promptPassword(toolName) {
             selectedTool = toolName;
@@ -244,10 +249,11 @@
             if(pass === "1234") {
                 closePasswordModal();
                 document.getElementById('activeToolName').innerText = selectedTool;
-                document.getElementById('outputResult').innerText = "Program loaded. Choose file or paste code to run.";
+                document.getElementById('outputResult').innerText = "Program loaded. Choose file or paste code and click 1-Click Decrypt.";
                 document.getElementById('fileInput').value = "";
                 document.getElementById('scriptInput').value = "";
                 document.getElementById('selectedFileName').classList.add('hidden');
+                document.getElementById('downloadBtn').classList.add('hidden');
                 document.getElementById('toolProgramModal').classList.remove('hidden');
                 document.getElementById('toolProgramModal').classList.add('flex');
             } else {
@@ -277,7 +283,7 @@
             }
 
             const btn = document.getElementById('runBtn');
-            btn.innerText = "Processing & Decrypting File...";
+            btn.innerText = "Decrypting Instantly...";
             btn.disabled = true;
 
             const formData = new FormData();
@@ -294,19 +300,31 @@
                 });
                 const data = await res.json();
                 if(res.ok) {
-                    document.getElementById('outputResult').innerText = data.output;
+                    decryptedDataText = data.output;
+                    decryptedFileName = data.filename;
+                    document.getElementById('outputResult').innerText = decryptedDataText;
+                    document.getElementById('downloadBtn').classList.remove('hidden');
                 } else {
-                    document.getElementById('outputResult').innerText = "# Error processing file.";
+                    document.getElementById('outputResult').innerText = "# Error during decryption.";
                 }
             } catch(err) {
-                setTimeout(() => {
-                    const fname = fileInput.files.length > 0 ? fileInput.files[0].name : "Pasted Script";
-                    document.getElementById('outputResult').innerText = `# Decryption Success for: ${fname}\n# Tool: ${selectedTool}\n\nimport base64\nprint('Successfully Decrypted by KAMAL')\n# [Source code fully restored and unpacked]`;
-                }, 1200);
+                document.getElementById('outputResult').innerText = "# Connection Error.";
             } finally {
-                btn.innerHTML = '<i class="fa-solid fa-play mr-2"></i> Run Decryption Program';
+                btn.innerHTML = '<i class="fa-solid fa-bolt mr-2"></i> 1-Click Instant Decrypt';
                 btn.disabled = false;
             }
+        }
+
+        function downloadDecryptedFile() {
+            const blob = new Blob([decryptedDataText], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = decryptedFileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
 
         function openProfileModal() {
