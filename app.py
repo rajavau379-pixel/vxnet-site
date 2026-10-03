@@ -15,7 +15,6 @@ def decrypt_file():
     
     filename = file.filename if file else "Pasted Script"
     
-    # ডিক্রিপশন সফল মেসেজ এবং সোর্স কোড রিস্টোর ফলাফল
     result_text = f"# Decryption Success for: {filename}\n# Selected Tool: {tool}\n\nimport base64\n\n# Recovered original source code:\nprint('Successfully Decrypted by KAMAL Tool')\n\n# [Bytecode verified and extracted successfully]\n# All protection layers bypassed."
     
     return jsonify({
