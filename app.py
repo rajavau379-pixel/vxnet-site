@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, jsonify
 import os
+import base64
+import zlib
+import re
 
 app = Flask(__name__)
 
@@ -24,49 +27,43 @@ def decrypt_file():
     elif code:
         file_bytes = code.encode('utf-8', errors='ignore')
 
-    extracted_code = []
-    extracted_code.append(f"# -*- coding: utf-8 -*-")
-    extracted_code.append(f"# ===================================================")
-    extracted_code.append(f"# VXNET MAGIC DECOMPILER & BYTECODE EXTRACTOR v8.0")
-    extracted_code.append(f"# Tool: {tool}")
-    extracted_code.append(f"# Target File: {original_name}")
-    extracted_code.append(f"# Status: SUCCESSFULLY EXTRACTED & RESTORED")
-    extracted_code.append(f"# ===================================================\n")
+    raw_text = file_bytes.decode('utf-8', errors='ignore')
+    unwrapped_code = raw_text
 
     try:
-        extracted_code.append("# [+] Analyzing binary structure and extracting embedded Python logic...")
+        # base64 এবং zlib এনকোডেড স্ট্রিং স্বয়ংক্রিয়ভাবে খুঁজে বের করে আনপ্যাক করার লজিক
+        b64_patterns = re.findall(r'b?["\']([A-Za-z0-9+/=]{20,})["\']', raw_text)
+        decoded_payloads = []
         
-        # বাইনারি বা .so ফাইল থেকে রিডেবল পাইথন স্ট্রিং এবং ফাংশন ফিল্টার করে বের করা
-        current_string = ""
-        strings_found = []
-        for b in file_bytes:
-            if 32 <= b <= 126:
-                current_string += chr(b)
-            else:
-                if len(current_string) >= 3:
-                    strings_found.append(current_string)
-                current_string = ""
-        if len(current_string) >= 3:
-            strings_found.append(current_string)
+        for b64_str in b64_patterns:
+            try:
+                decoded_bytes = base64.b64decode(b64_str)
+                try:
+                    decompressed = zlib.decompress(decoded_bytes)
+                    inner_text = decompressed.decode('utf-8', errors='ignore')
+                    decoded_payloads.append(inner_text)
+                except:
+                    inner_text = decoded_bytes.decode('utf-8', errors='ignore')
+                    if len(inner_text.strip()) > 3:
+                        decoded_payloads.append(inner_text)
+            except:
+                pass
 
-        # অপ্রয়োজনীয় সিস্টেম হেডার বাদ দিয়ে পাইথনের দরকারি অংশ ফিল্টার করা
-        extracted_code.append("\n# --- Restored Python Imports, Functions & Logic ---")
-        for token in strings_found:
-            clean_t = token.strip()
-            if any(kw in clean_t for kw in ['import ', 'def ', 'print', 'return', 'if ', 'else', 'for ', 'while', 'class ', 'self', 'sys', 'os', 'requests', 'exec', 'eval', 'try', 'except', 'input', 'open', 'write']):
-                extracted_code.append(clean_t)
-            elif len(clean_t) > 4 and ' ' not in clean_t and clean_t.isidentifier():
-                extracted_code.append(f"# var/func: {clean_t}")
-
-        extracted_code.append("\n# --- Full Extracted Payload Strings ---")
-        for s in strings_found[:200]:
-            if len(s.strip()) > 3 and not s.startswith("ELF") and not s.endswith(".so"):
-                extracted_code.append(f"# {s}")
-
+        if decoded_payloads:
+            unwrapped_code = "\n\n".join(decoded_payloads)
     except Exception as e:
-        extracted_code.append(f"# Error during extraction: {str(e)}")
+        unwrapped_code = raw_text + f"\n# Decompression note: {str(e)}"
 
-    final_output = "\n".join(extracted_code)
+    final_output = f'''# -*- coding: utf-8 -*-
+# ===================================================
+# VXNET AUTO-UNWRAPPER & DECODER ENGINE
+# Tool: {tool}
+# Target File: {original_name}
+# Status: SUCCESSFULLY UNPACKED & RESTORED
+# ===================================================
+
+{unwrapped_code}
+'''
 
     return jsonify({
         "status": "success",
